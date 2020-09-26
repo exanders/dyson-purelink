@@ -208,6 +208,25 @@ class Device extends EventEmitter {
         }
       }
     })
+
+    this.client.on('reconnect', () => {
+      debug(`MQTT: reconnecting to ${this.url}`)
+    })
+
+    this.client.on('offline', () => {
+      debug(`MQTT: The client went offline`)
+    })
+
+    this.client.on('error', error => {
+      debug(`MQTT: Error: ${error}`)
+    })
+
+    this.client.stream.on('error', error => {
+      debug(`MQTT: Stream Error: ${error}`);
+      this.client.end();
+      this._connect()
+    })
+
   }
 
   _decryptCredentials () {

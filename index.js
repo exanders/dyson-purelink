@@ -63,7 +63,7 @@ class DysonPurelink {
 
       debug(`Got network device: ${networkDevice.serial}`)
 
-      // Update devices with network info or push to network collectio
+      // Update devices with network info or push to network collection
       if (this._devices.has(networkDevice.serial)) {
         this._devices.get(networkDevice.serial).updateNetworkInfo(networkDevice)
       } else {
